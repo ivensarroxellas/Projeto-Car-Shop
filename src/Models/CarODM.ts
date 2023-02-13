@@ -6,7 +6,7 @@ import {
 } from 'mongoose';
 import ICar from '../Interfaces/ICar';
 
-class CardODM {
+class CarODM {
   private model: Model<ICar>;
   private schema: Schema;
 
@@ -15,7 +15,7 @@ class CardODM {
       model: { type: String, required: true },
       year: { type: Number, required: true },
       color: { type: String, required: true },
-      status: { type: Boolean, required: true },
+      status: { type: Boolean, required: false },
       buyValue: { type: Number, required: true },
       doorsQty: { type: Number, required: true },
       seatsQty: { type: Number, required: true },
@@ -28,4 +28,4 @@ class CardODM {
   }
 }
 
-export default CardODM;
+export default CarODM;

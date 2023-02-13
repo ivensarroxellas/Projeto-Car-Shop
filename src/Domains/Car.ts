@@ -30,14 +30,14 @@ class Car {
   public setId(id: string) {
     this.id = id;
   }
-  
-  /*   public getModel() {
+
+  public getModel() {
     return this.model;
   }
 
   public setModel(model: string) {
     this.model = model;
-  } */
+  }
 
   public getYear() {
     return this.year;

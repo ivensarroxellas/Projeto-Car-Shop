@@ -1,5 +1,5 @@
 import ICar from '../Interfaces/ICar';
-import CarODM from '../Models/carsODM';
+import CarODM from '../Models/CarODM';
 import Car from '../Domains/Car';
 
 class CarsService {
