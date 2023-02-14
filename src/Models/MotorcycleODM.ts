@@ -13,7 +13,7 @@ class MotorcycleODM extends AbstractODM<IMotorcycle> {
       category: { type: String, required: true },
       engineCapacity: { type: Number, required: true },
     });
-    super(schema, 'Motor');
+    super(schema, 'Motorcycle');
   }
 }
 

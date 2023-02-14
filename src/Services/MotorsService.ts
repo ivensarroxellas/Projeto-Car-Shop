@@ -16,6 +16,23 @@ class MotorsService {
     
     return this.createMotor(newMotorcycle);
   }
+
+  public async getAll(): Promise<(Motorcycle | null)[]> {
+    const motorODM = new MotorcycleODM();
+    const getAll = await motorODM.getAll();
+    
+    return getAll.map((motor) => this.createMotor(motor));
+  }
+
+  public async getById(id: string) {
+    const motorODM = new MotorcycleODM();
+    const motorById = await motorODM.getById(id);
+
+    if (motorById === false) {
+      return false;
+    } 
+    return this.createMotor(motorById as IMotorcycle);
+  }
 }
 
 export default MotorsService;

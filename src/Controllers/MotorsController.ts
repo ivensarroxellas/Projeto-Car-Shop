@@ -29,8 +29,33 @@ class MotorsController {
     };
 
     try {
-      const newCar = await this.service.create(motor);
-      return this.res.status(201).json(newCar);
+      const newMotor = await this.service.create(motor);
+      return this.res.status(201).json(newMotor);
+    } catch (error) {
+      this.next(error);
+    }
+  }
+
+  public async getAll() {
+    try {
+      const motors = await this.service.getAll();
+      return this.res.status(200).json(motors);
+    } catch (error) {
+      this.next(error);
+    }
+  }
+
+  public async getById() {
+    const { id } = this.req.params;
+    try {
+      const motor = await this.service.getById(id);
+      if (motor === false) {
+        return this.res.status(422).json({ message: 'Invalid mongo id' });
+      }
+      if (!motor) {
+        return this.res.status(404).json({ message: 'Motorcycle not found' });
+      }
+      return this.res.status(200).json(motor);
     } catch (error) {
       this.next(error);
     }
