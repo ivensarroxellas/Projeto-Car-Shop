@@ -1,8 +1,8 @@
 import express from 'express';
-import routes from './Routes/Cars.routes';
+import carRoutes from './Routes/Cars.routes';
 
 const app = express();
 app.use(express.json());
-app.use(routes);
+app.use('/cars', carRoutes);
 
 export default app;
