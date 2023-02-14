@@ -44,6 +44,7 @@ class CarsController {
       this.next(error);
     }
   }
+
   public async getById() {
     const { id } = this.req.params;
     try {
@@ -55,6 +56,36 @@ class CarsController {
         return this.res.status(404).json({ message: 'Car not found' });
       }
       return this.res.status(200).json(car);
+    } catch (error) {
+      this.next(error);
+    }
+  }
+
+  public async updateById() {
+    const { id } = this.req.params;
+    if (!this.req.body.status) this.req.body.status = false;
+    const car: ICar = {
+      id: this.req.body.id,
+      model: this.req.body.model,
+      year: this.req.body.year,
+      color: this.req.body.color,
+      status: this.req.body.status,
+      buyValue: this.req.body.buyValue,
+      doorsQty: this.req.body.doorsQty,
+      seatsQty: this.req.body.seatsQty,
+    };
+  
+    try {
+      const cars = await this.service.updatebyId(id, car);
+      console.log('controller', cars);
+      
+      if (cars === false) {
+        return this.res.status(422).json({ message: 'Invalid mongo id' });
+      }
+      if (!cars) {
+        return this.res.status(404).json({ message: 'Car not found' });
+      }
+      return this.res.status(200).json(cars);
     } catch (error) {
       this.next(error);
     }

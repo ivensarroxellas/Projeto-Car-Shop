@@ -20,23 +20,31 @@ class CarsService {
   public async getAll(): Promise<(Car | null)[]> {
     const carODM = new CarODM();
     const getAll = await carODM.getAll();
-    console.log('retorno da model getAll', getAll);
     
-    const result = getAll.map((car) => this.createCar(car));
-
-    return result;
+    return getAll.map((car) => this.createCar(car));
   }
 
   public async getById(id: string) {
     const carODM = new CarODM();
-    const car = await carODM.getById(id);
-    console.log('retorno da model getByID', this.getById);
+    const carById = await carODM.getById(id);
 
-    if (car === false) {
+    if (carById === false) {
       return false;
     } 
-    const carCreated = this.createCar(car as ICar);
-    return carCreated;
+    return this.createCar(carById as ICar);
+  }
+
+  public async updatebyId(id:string, car:ICar) {
+    const carODM = new CarODM();
+    const carUpdated = await carODM.updateById(id, car);
+    console.log('service', carUpdated);
+    if (carUpdated === false) {
+      return false;
+    } 
+    if (carUpdated === null) {
+      return null;
+    }
+    return this.createCar(carUpdated as ICar);
   }
 }
 

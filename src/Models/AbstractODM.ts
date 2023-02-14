@@ -4,6 +4,7 @@ import {
   model,
   models,
   isValidObjectId,
+  UpdateQuery,
 } from 'mongoose';
 
 abstract class AbstractODM<T> {
@@ -35,6 +36,18 @@ abstract class AbstractODM<T> {
       return false;
     }
     return this.model.findOne({ _id: id });
+  }
+
+  public async updateById(id: string, obj: Partial<T>): Promise<T | boolean | null> {
+    const valid = await this.ValidObjectId(id);
+    if (valid === false) {
+      return false;
+    }
+    return this.model.findByIdAndUpdate(
+      { _id: id },
+      { ...obj } as UpdateQuery<T>,
+      { new: true },
+    );
   }
 }
 
