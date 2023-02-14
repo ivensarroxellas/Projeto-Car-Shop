@@ -37,7 +37,6 @@ class CarsService {
   public async updatebyId(id:string, car:ICar) {
     const carODM = new CarODM();
     const carUpdated = await carODM.updateById(id, car);
-    console.log('service', carUpdated);
     if (carUpdated === false) {
       return false;
     } 

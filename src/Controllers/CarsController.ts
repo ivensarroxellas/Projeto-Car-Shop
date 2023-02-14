@@ -77,7 +77,6 @@ class CarsController {
   
     try {
       const cars = await this.service.updatebyId(id, car);
-      console.log('controller', cars);
       
       if (cars === false) {
         return this.res.status(422).json({ message: 'Invalid mongo id' });
